@@ -1,0 +1,18 @@
+# ============================================================
+# Problema da Feira — Dependências
+# ============================================================
+#
+# Instalar com:
+#
+#   pip install -r requirements.txt
+#
+# Atualizar este arquivo sempre que uma nova biblioteca
+# for adicionada ao projeto, com um commit do tipo:
+#
+#   chore: adicionar <biblioteca> ao requirements.txt
+#
+# Versões mínimas (>=) são preferíveis a versões fixas (==)
+# para reduzir conflitos entre ambientes dos membros do grupo.
+# ============================================================
+
+matplotlib>=3.7
