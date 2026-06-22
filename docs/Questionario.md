@@ -2,11 +2,11 @@
 
 ---
 
-> **Grupo:** <!-- Nome do grupo -->
+> **Grupo:** <thebestoftheclass>
 >
-> **Integrantes:** <!-- Nomes dos integrantes -->
+> **Integrantes:** <Anna Leticia, Alice Mariana, Gustavo Morais, Vitória Eloise>
 >
-> **Repositório:** <!-- URL do repositório privado -->
+> **Repositório:** <https://github.com/annadrt/thebestoftheclass-ia1-problema-da-feira>
 >
 > **Data de entrega:** 22 de junho de 2026
 
