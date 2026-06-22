@@ -103,15 +103,62 @@ Com 5 itens e quantidades potencialmente ilimitadas, o espaço de estados é tec
 
 ## 4. Busca Não Informada
 
- Discuta BFS, DFS e a explosão combinatória do espaço de estados deste problema. Argumente por que busca exaustiva é inviável. 
+Algoritmos de busca não informada — como BFS (Busca em Largura) e DFS (Busca em Profundidade) — exploram o espaço de estados sem utilizar conhecimento do domínio além da definição do problema. Embora garantam completude e, em alguns casos, otimalidade, sua aplicação ao Problema da Feira é impraticável devido à dimensão do espaço de busca.
+4.1 BFS — Busca em Largura
+A BFS expandiria os nós por nível de profundidade, garantindo que a solução de menor caminho seja encontrada primeiro. Contudo, o fator de ramificação b do grafo do Problema da Feira é da ordem de 2|I| + |I|² ≈ 35 (10 ações de adicionar/remover × 5 itens, mais 25 substituições). A memória necessária para manter a fronteira de busca cresce como O(b^d), onde d é a profundidade da solução. Para d = 100, a fronteira teria mais de 35^100 nós — completamente inviável.
+4.2 DFS — Busca em Profundidade
+A DFS reduziria o consumo de memória para O(b·d), mas em espaços de estados potencialmente infinitos (ou ciclicamente conectados), pode divergir sem encontrar solução. Além disso, não garante que a solução encontrada seja ótima.
+4.3 Explosão Combinatória
+Este trecho ilustra o crescimento exponencial do espaço de busca
+em função da profundidade (d), considerando um fator de ramificação
+aproximado b ≈ 35.
 
+Em problemas de busca em espaço de estados, cada estado pode gerar
+múltiplos estados sucessores. Aqui, estimamos que cada estado gera
+cerca de 35 novos estados.
+
+O número de nós na fronteira cresce como b^d (crescimento exponencial),
+o que torna buscas exaustivas (como BFS e DFS) inviáveis para profundidades grandes.
+
+Exemplos:
+d = 1   -> 35 nós
+d = 5   -> ~5,2 × 10^7 nós
+d = 10  -> ~2,7 × 10^15 nós
+d = 50  -> ~10^77 nós
+d = 100 -> ~10^154 nós
+
+Esses valores mostram a chamada "explosão combinatória",
+onde o espaço de busca cresce de forma impraticável.
+
+Por isso, abordagens de busca não informada tornam-se inviáveis,
+sendo necessário utilizar estratégias heurísticas (como hill climbing),
+que exploram apenas parte do espaço de estados de forma guiada,
+sem necessidade de expansão completa da árvore de busca.
 ---
 
 ## 5. Busca Heurística
+5. Busca Heurística
+O agente Alice implementa uma estratégia de melhoria iterativa com heurística (iterative improvement), uma variante de hill climbing estocástico. A cada iteração, o agente gera um estado candidato por aplicação aleatória de um operador e o aceita se ele reduzir o valor de h(s).
+5.1 Geração de Candidatos
+A geração de candidatos segue o seguinte procedimento estocástico:
+selecionar aleatoriamente um operador (adicionar, remover ou substituir);
+selecionar aleatoriamente um item (ou par de itens, para substituição);
+aplicar o operador ao estado atual, obtendo um estado candidato;
+calcular h(candidato).
 
- Explique a heurística h(s) implementada, a política de aceitação adotada e o mecanismo de melhoria iterativa. Discuta as escolhas de projeto realizadas. 
+O uso de aleatoriedade controlada (via seed) garante que o agente explore regiões distintas do espaço de estados a cada execução, evitando ficar preso em mínimos locais triviais. A reprodutibilidade — fundamental para auditabilidade — é garantida pela fixação da seed.
+5.2 Política de Aceitação
+A política de aceitação mínima implementada é:
+se h(candidato) < h(estado_atual):
+    estado_atual ← candidato   # aceitar melhoria
+senão:
+    descartar candidato        # rejeitar
 
----
+Esta política é equivalente ao algoritmo Hill Climbing (subida de encosta) aplicado à minimização de h(s). Ela é gulosa: aceita qualquer melhoria imediata sem considerar o impacto de longo prazo. Como extensão, pode-se adotar aceitação probabilística ao estilo Simulated Annealing, aceitando pioras com probabilidade decrescente, o que permite escapar de platôs e mínimos locais.
+5.3 Melhoria Iterativa e Critério de Parada
+O ciclo de busca se repete até que uma das condições de parada seja satisfeita:
+h(s) = 0: solução ótima encontrada (status OTIMA);
+número de iterações atingiu max_iter: retorna melhor estado encontrado (status APROXIMADA).
 
 ## 6. Busca em Caminho
 
@@ -176,8 +223,6 @@ Rastreabilidade e Logs: A arquitetura do sistema rejeita a opacidade das abordag
 Reprodutibilidade e Accountability: A inclusão mandatória de sementes pseudoaleatórias (seed) garante a reprodutibilidade dos testes estocásticos. Na governança corporativa, essa propriedade é vital para garantir o accountability (responsabilização), permitindo que falhas sistêmicas sejam replicadas de forma idêntica por peritos ou órgãos reguladores.
 Desacoplamento Arquitetural e Replicabilidade Industrial
 A divisão estrita entre a infraestrutura do ambiente (main.py), a inteligência local (solucao.py) e a análise experimental quantitativa (experimento.py) simula o design de software de grandes sistemas de tomada de decisão automatizada utilizados na indústria moderna. Essa modularidade assegura que a política de decisão do agente possa ser estendida, refinada ou completamente substituída por outros paradigmas (como Algoritmos Genéticos ou Aprendizado por Reforço) sem a necessidade de reescrever os pipelines de teste, coleta de métricas e geração automática de gráficos de convergência.
-
-
 ---
 
 ## 10. Conclusão
