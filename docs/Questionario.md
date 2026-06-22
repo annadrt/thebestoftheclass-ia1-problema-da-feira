@@ -123,16 +123,13 @@ O exercício utiliza IA Simbólica, mais especificamente técnicas de busca loca
 Paradigmas Alternativos
 IA Conexionista (Aprendizado por Reforço): o agente aprenderia a selecionar itens por meio de recompensas e penalidades, utilizando redes neurais para encontrar boas estratégias.
 IA Híbrida: combinaria busca simbólica com redes neurais, usando aprendizado para avaliar estados e busca para orientar a tomada de decisão.
-
 Vantagens e Limitações
 Na abordagem simbólica 
 Vantagens: Explicável, auditável, exige poucos recursos e segue regras determinísticas.
 Limitaçõs: Pouca capacidade de generalização e risco de ficar presa em mínimos locais.
-
 Na abordagem conexionista 
 Vantagens: Aprende padrões automaticamente e adapta-se a ambientes dinâmicos.
 Limitações: Baixa explicabilidade e alto custo de treinamento.
-
 Na abordagem hibrida
 Vantagens: Combina aprendizado, generalização e explicabilidade.
 Limitações: Maior complexidade de implementação e calibração.**
