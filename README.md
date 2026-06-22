@@ -7,7 +7,7 @@
 
 > Preencha os dados do grupo antes da entrega.
 
-**Nome do grupo: The Best of THe Class**
+**Nome do grupo: The Best of The Class**
 
 <!-- Escolha um nome para o grupo -->
 
