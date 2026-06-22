@@ -6,7 +6,7 @@
 >
 > **Integrantes:** <!-- Anna Leticia do Nascimento Soares Duarte, Alice Mariana de Souza, Gustavo de Morais Lopes e Vitória Eloise de Assis Rocha -->
 >
-> **Repositório:** <!-- URL do repositório privado -->
+> **Repositório:** <https://github.com/annadrt/thebestoftheclass-ia1-problema-da-feira>
 >
 > **Data de entrega:** 22 de junho de 2026
 
@@ -235,7 +235,7 @@ Discuta emergência, cognição computacional, representação, arquitetura e ep
 
 Discuta consumo energético, uso massivo de GPUs, custo de treinamento e inferência, impacto ambiental e escalabilidade global. Relacione com data centers, refrigeração, consumo hídrico e demanda elétrica.
 
-> **Resposta:**
+> **Resposta: Soluções baseadas exclusivamente em LLMs são energeticamente insustentáveis em larga escala porque o modelo computacional que as sustenta exige recursos físicos crescentes de forma desproporcional ao ganho de desempenho. O treinamento é o custo mais visível. Cada GPU moderna tem consumo individual de 400 a 700 watts, e um cluster realista para modelos de fronteira reúne milhares dessas unidades. Modelos mais recentes, com parâmetros na casa dos trilhões, multiplicam esse custo por ordens de magnitude. A inferência é o custo silencioso e contínuo. Cada resposta gerada consome entre 0,001 e 0,01 kWh, o que parece negligenciável até que se considere bilhões de queries diárias em escala global. O consumo acumulado chega a dezenas de gigawatt-hora por dia sem que nenhum aprendizado aconteça. Toda essa computação ocorre em data centers que adicionam overhead significativo. O resfriamento exige sistemas de grande porte, e um data center médio-grande consome entre 3 e 5 milhões de litros de água por dia. O treinamento do GPT-3 foi estimado em cerca de 700 mil litros só de consumo hídrico. O problema de escala global é que a demanda projetada para IA até 2030 varia de 400 a 900 TWh por ano, comparável ao consumo elétrico anual de países inteiros. A rede elétrica não foi dimensionada para essa demanda concentrada, e a matriz energética ainda é majoritariamente fóssil, o que torna a pegada de carbono real independentemente de compromissos corporativos de neutralidade climática. O ponto central é que LLMs foram construídos sobre a premissa implícita de que energia, água e hardware são recursos ilimitados e baratos. Essa premissa não resiste à escala global.**
 
 ---
 
@@ -243,7 +243,7 @@ Discuta consumo energético, uso massivo de GPUs, custo de treinamento e inferê
 
 Discuta adequação arquitetural, custo-benefício computacional, complexidade desnecessária, latência, interpretabilidade e auditabilidade. Compare heurística simples, busca clássica, sistemas simbólicos e LLMs.
 
-> **Resposta:**
+> **Resposta: A escolha de arquitetura deve começar na natureza do problema, não na tecnologia disponível. Usar um LLM onde uma heurística simples resolve é como usar um torno CNC para aparar um lápis: funciona, mas a desproporção entre custo e resultado é absurda. Adequação arquitetural significa reconhecer que cada classe de problema tem uma estrutura, e a arquitetura ideal é a que se alinha a essa estrutura. Problemas de roteamento têm solução ótima garantida com A* ou Dijkstra. Classificação binária com features bem definidas funciona com regressão logística ou árvore de decisão. Colocar um LLM em qualquer um desses casos adiciona latência, variabilidade e custo sem nenhum ganho real. O custo-benefício computacional torna isso ainda mais claro. Um LLM exige GPU dedicada, tem latência na casa de segundos e não garante consistência: a mesma entrada pode gerar saídas diferentes. Uma heurística bem calibrada é determinística, rápida e barata. O princípio é direto: usar o menor modelo capaz de resolver o problema com a qualidade necessária. Interpretabilidade e auditabilidade são critérios eliminatórios em contextos regulados. Sistemas simbólicos e baseados em regras permitem rastrear exatamente por que uma decisão foi tomada, o que é indispensável em saúde, direito e finanças. LLMs operam como caixa-preta: quando erram, não existe forma direta de entender o motivo. LLMs se justificam quando o problema envolve linguagem natural ambígua, generalização para entradas não antecipadas ou síntese criativa, ou seja, quando o espaço de possibilidades é grande demais para ser coberto por regras explícitas. Fora desse território, qualquer uma das alternativas clássicas é mais rápida, mais barata, mais confiável e mais transparente.**
 
 ---
 
