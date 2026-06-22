@@ -7,7 +7,7 @@
 
 > Preencha os dados do grupo antes da entrega.
 
-**Nome do grupo:**
+**Nome do grupo: The Best of THe Class**
 
 <!-- Escolha um nome para o grupo -->
 
@@ -15,10 +15,10 @@
 
 | Nome completo | Usuário GitHub | Questão do seminário |
 |---|---|---|
-| <!-- Nome --> | [@usuario](https://github.com/usuario) | <!-- nº da questão --> |
-| <!-- Nome --> | [@usuario](https://github.com/usuario) | <!-- nº da questão --> |
-| <!-- Nome --> | [@usuario](https://github.com/usuario) | <!-- nº da questão --> |
-| <!-- Nome --> | [@usuario](https://github.com/usuario) | <!-- nº da questão --> |
+| Alice Mariana de Souza | [@usuario](https://github.com/usuario) | 40 |
+| Anna Letícia do Nascimento Soares Duarte | [@usuario](https://github.com/usuario) | 43 |
+| Gustavo de Morais Lopes | [@usuario](https://github.com/usuario) | 2 |
+| Vitória Eloise de Assis Rocha | [@usuario](https://github.com/usuario) | 50 |
 
 > A coluna "Questão do seminário" será preenchida após a atribuição pelo professor, uma semana antes da entrega.
 
