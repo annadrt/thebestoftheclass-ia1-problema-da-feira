@@ -2,9 +2,9 @@
 
 ---
 
-> **Grupo:** <thebestoftheclass>
+> **Grupo:** thebestoftheclass
 >
-> **Integrantes:** <Anna Leticia, Alice Mariana, Gustavo Morais, Vitória Eloise>
+> **Integrantes:** Anna Leticia, Alice Mariana, Gustavo Morais, Vitória Eloise
 >
 > **Repositório:** <https://github.com/annadrt/thebestoftheclass-ia1-problema-da-feira>
 >
