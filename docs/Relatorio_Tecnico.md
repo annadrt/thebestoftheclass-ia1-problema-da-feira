@@ -5,7 +5,7 @@
 
 > **Grupo:**  The Best Of The Class
 >
-> **Integrantes:**  Anna Leticia do Nasciment Soares Duarte, Alice Mariana de Souza, Gustavo de Morais Lopes e Vitória Eloise de Assis Rocha
+> **Integrantes:**  Anna Leticia do Nascimento Soares Duarte, Alice Mariana de Souza, Gustavo de Morais Lopes e Vitória Eloise de Assis Rocha
 >
 > **Repositório:**  URL do repositório privado 
 >
@@ -75,14 +75,23 @@ Peso da aresta	--> Variação de h(s) causada pela ação
 Considerando o ambiente definido em data/feira.csv e um orçamento de R$ 5,00, a seguinte sequência ilustra transições no grafo:
 
 Nó 0:  {Laranja:0, Banana:0, Melancia:0, Melão:0, Manga:0}  TOTAL=0,00  h=5,00
-  ── adicionar(Melancia) ──▶
+
+  ── adicionar(Melancia) -->
+  
 Nó 1:  {Laranja:0, Banana:0, Melancia:1, Melão:0, Manga:0}  TOTAL=3,00  h=2,00
-  ── adicionar(Manga) ──▶
+
+  ── adicionar(Manga) -->
+  
 Nó 2:  {Laranja:0, Banana:0, Melancia:1, Melão:0, Manga:1}  TOTAL=3,75  h=1,25
-  ── adicionar(Laranja) ──▶
+
+  ── adicionar(Laranja) -->
+  
 Nó 3:  {Laranja:1, Banana:0, Melancia:1, Melão:0, Manga:1}  TOTAL=4,25  h=0,75
-  ── adicionar(Manga) ──▶
+
+  ── adicionar(Manga) -->
+  
 Nó 4:  {Laranja:1, Banana:0, Melancia:1, Melão:0, Manga:2}  TOTAL=5,00  h=0,00 
+
 
 O caminho acima representa uma solução ótima encontrada em 4 transições. Na prática, o agente pode percorrer caminhos muito mais longos — com avanços e retrocessos — antes de convergir para h(s) = 0, pois a seleção de ações é estocástica e nem toda transição reduz o erro.
 
