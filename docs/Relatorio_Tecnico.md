@@ -326,7 +326,7 @@ Propriedades do Ambiente de Tarefa
 ---
 
 ## 9. Discussão Conceitual
-
+---
  Nesta seção, realizamos uma reflexão crítica sobre as implicações teóricas, regulatórias e filosóficas que envolvem o desenvolvimento do Agente Alice no Problema da Feira, conectando as práticas laboratoriais aos desafios contemporâneos da engenharia de software e da governança algorítmica.
 Inteligência Artificial Simbólica e Emergência do Comportamento
 O ecossistema implementado baseia-se fundamentalmente no paradigma da IA Simbólica Clássica. A inteligência do sistema não reside em uma estrutura pré-programada de forma estática, mas emerge de maneira dinâmica a partir do alinhamento entre a representação de estados discretos (item: quantidade), a execução de operadores de vizinhança e a orientação matemática fornecida pela função heurística h(s). O laço iterativo em si atua como um motor cego; a cognição computacional e a capacidade de resolução do problema manifestam-se estritamente na interação do agente com as restrições físicas impostas pelo ambiente.
@@ -340,7 +340,7 @@ Rastreabilidade e Logs: A arquitetura do sistema rejeita a opacidade das abordag
 Reprodutibilidade e Accountability: A inclusão mandatória de sementes pseudoaleatórias (seed) garante a reprodutibilidade dos testes estocásticos. Na governança corporativa, essa propriedade é vital para garantir o accountability (responsabilização), permitindo que falhas sistêmicas sejam replicadas de forma idêntica por peritos ou órgãos reguladores.
 Desacoplamento Arquitetural e Replicabilidade Industrial
 A divisão estrita entre a infraestrutura do ambiente (main.py), a inteligência local (solucao.py) e a análise experimental quantitativa (experimento.py) simula o design de software de grandes sistemas de tomada de decisão automatizada utilizados na indústria moderna. Essa modularidade assegura que a política de decisão do agente possa ser estendida, refinada ou completamente substituída por outros paradigmas (como Algoritmos Genéticos ou Aprendizado por Reforço) sem a necessidade de reescrever os pipelines de teste, coleta de métricas e geração automática de gráficos de convergência.
----
+
 
 ## 10. Conclusão
 
