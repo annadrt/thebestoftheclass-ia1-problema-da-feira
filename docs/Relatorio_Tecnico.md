@@ -54,7 +54,124 @@ Os objetivos específicos desta atividade são:
 
 ## 2. Modelagem Formal
 
- Defina formalmente: ambiente, estado, ações, espaço de estados, objetivo e heurística. Use a notação apresentada na contextualização. 
+ ## 2. Modelagem Formal
+
+### Ambiente
+
+O ambiente é definido pelo par $E = (I, O)$, onde $I = \{i_1, i_2, \ldots, i_n\}$ é o conjunto de itens disponíveis com preços $p : I \to \mathbb{R}^+$, e $O \in \mathbb{R}^+$ é o orçamento-alvo.
+
+| Propriedade | Valor |
+|---|---|
+| Observabilidade | Totalmente observável |
+| Dinamismo | Estático |
+| Determinismo | Determinístico |
+| Domínio | Discreto |
+| Cardinalidade | Finito |
+| Comportamento do agente | Estocástico |
+
+---
+
+### Estado
+
+Um estado $s$ é uma função que mapeia cada item a uma quantidade inteira não negativa:
+
+$$s : I \to \mathbb{N}$$
+
+O custo total associado a um estado é:
+
+$$\text{TOTAL}(s) = \sum_{i \in I} s(i) \cdot p(i)$$
+
+**Exemplo:**
+
+```
+{
+  "Laranja":  3,
+  "Banana":  10,
+  "Melancia":  3,
+  "Melão":   2,
+  "Manga":   2
+}
+```
+
+O estado inicial é a cesta vazia $s_0$, onde $s_0(i) = 0\ \forall\, i \in I$, com $\text{TOTAL}(s_0) = 0$.
+
+---
+
+### Ações
+
+O agente dispõe de três operadores de transição. Cada ação define uma função de transição $T : \mathcal{S} \times \mathcal{A} \to \mathcal{S}$.
+
+| Operador | Definição | Precondição |
+|---|---|---|
+| $\text{adicionar}(i)$ | $s'(i) = s(i) + 1$ | nenhuma |
+| $\text{remover}(i)$ | $s'(i) = s(i) - 1$ | $s(i) > 0$ |
+| $\text{substituir}(i, j)$ | $s'(i) = s(i) - 1,\; s'(j) = s(j) + 1$ | $s(i) > 0,\; i \neq j$ |
+
+---
+
+### Espaço de Estados
+
+O espaço de estados $\mathcal{S}$ é modelado como um **grafo implícito** $G = (\mathcal{S},\, \mathcal{A})$:
+
+- **Nós** → estados $s \in \mathcal{S}$
+- **Arestas** → ações $a \in \mathcal{A}$ que transitam $s \to s'$
+- **Caminho** → sequência de ações $\pi = \langle s_0, s_1, \ldots, s_k \rangle$
+
+O grafo é **implícito**: vizinhos são gerados sob demanda pela aplicação dos operadores, sem construção explícita na memória. O espaço de estados cresce combinatorialmente com o número de itens, tornando a busca exaustiva inviável mesmo para instâncias moderadas.
+
+---
+
+### Objetivo
+
+O estado objetivo $s^*$ satisfaz:
+
+$$h(s^*) = 0 \quad \Longleftrightarrow \quad \text{TOTAL}(s^*) = O$$
+
+Na ausência de solução exata, o objetivo relaxado é:
+
+$$s^* = \underset{s \in \mathcal{S}}{\arg\min}\ h(s)$$
+
+O critério de parada é $h(s) = 0$ ou $\text{iterações} = \text{max\_iter}$.
+
+---
+
+### Heurística
+
+$$h(s) = \left| O - \text{TOTAL}(s) \right|$$
+
+A função $h(s)$ representa o erro absoluto entre o orçamento-alvo e o total atual da cesta. Suas propriedades:
+
+- $h(s) = 0$ indica solução ótima
+- $h(s) > 0$ indica distância ao objetivo
+- É **admissível**: nunca superestima o custo real restante
+- Guia a melhoria iterativa: o agente aceita transições $s \to s'$ quando $h(s') < h(s)$
+
+---
+
+### Ciclo do Agente
+
+A cada iteração, o agente executa o ciclo perceber–agir:
+
+```
+perceber(s_t)
+    → gerar vizinho s' via operador aleatório
+    → calcular h(s')
+    → aplicar política de aceitação
+    → s_{t+1} = s' se h(s') < h(s_t), senão s_{t+1} = s_t
+    → registrar em entradas_log
+```
+
+| Conceito (AIMA) | Implementação |
+|---|---|
+| Ambiente | CSV + orçamento |
+| Percepção | estado atual da cesta |
+| Agente | `agente_alice()` |
+| Estado | dicionário `item → quantidade` |
+| Ação | adicionar / remover / substituir |
+| Espaço de estados | conjunto de cestas possíveis |
+| Heurística | erro absoluto $h(s)$ |
+| Objetivo | $h(s) = 0$ |
+| Racionalidade | minimizar $h(s)$ dentro de `max_iter` | 
 
 ---
 
