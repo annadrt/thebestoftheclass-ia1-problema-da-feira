@@ -358,7 +358,6 @@ Discuta aplicações que exigem rastreabilidade, explicabilidade, representaçã
 
 > **Resposta: Representação simbólica continua relevante porque há domínios onde o conhecimento é explícito, estruturado e precisa ser auditável, e nenhuma abordagem estatística substitui isso com a mesma confiabilidade. Sistemas especialistas em medicina e direito codificam regras que precisam ser rastreáveis para fins legais e éticos. Ontologias estruturam conhecimento de domínio de forma que sistemas possam fazer inferência lógica verificável. Planejamento formal em robótica e logística exige que sequências de ação sejam construídas com garantias, não aproximadas. Em IA moderna, representação simbólica aparece frequentemente em sistemas híbridos justamente para cobrir as camadas onde transparência e raciocínio formal são inegociáveis, compensando a opacidade das camadas neurais.**
 
----
 
 ## 28. O agente implementado no Problema da Feira pode ser considerado parcialmente simbólico?
 
