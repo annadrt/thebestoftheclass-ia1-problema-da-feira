@@ -2,162 +2,179 @@
 # -*- coding: utf-8 -*-
 
 """
-Problema da Feira
+solucao.py — Implementação do Agente Alice
 
-Este módulo implementa o agente Alice.
-
-O agente:
-
-- percebe o ambiente;
-- conhece os itens disponíveis;
-- conhece os preços;
-- possui um objetivo;
-- executa ações;
-- busca minimizar erro heurístico.
-
-Inicialmente o agente não possui
-comportamento inteligente.
-
-A inteligência emerge conforme
-os operadores heurísticos e mecanismos
-de busca são implementados.
+O agente utiliza busca local com melhoria iterativa
+para encontrar uma cesta cujo total se aproxime ao
+máximo do orçamento-alvo, minimizando h(s) = |orçamento - total|.
 """
 
-from collections import namedtuple
 import random
+from collections import namedtuple
 
 
-# ============================================================
-# Estrutura de retorno
-# ============================================================
-
+# Estrutura de retorno do agente
 Resultado = namedtuple(
     "Resultado",
-    [
-        "estado",
-        "total",
-        "erro",
-        "iteracoes",
-        "status",
-        "entradas_log",
-        "log"
-    ]
+    ["estado", "total", "erro", "iteracoes", "status", "log", "entradas_log"]
 )
+
+
+# ============================================================
+# Funções auxiliares
+# ============================================================
+
+def calcular_total(estado, precos):
+    """Calcula o custo total da cesta."""
+    return sum(qtd * precos[item] for item, qtd in estado.items())
+
+
+def h(estado, precos, orcamento):
+    """
+    Função heurística: erro absoluto entre orçamento e total da cesta.
+    h(s) = |orcamento - total(s)|
+    Quanto menor, melhor. h(s) = 0 indica solução ótima.
+    """
+    return abs(orcamento - calcular_total(estado, precos))
+
+
+# ============================================================
+# Operadores de ação
+# ============================================================
+
+def gerar_vizinho(estado, itens, rng):
+    """
+    Seleciona e aplica um operador aleatório válido:
+        - adicionar: incrementa quantidade de um item
+        - remover:   decrementa quantidade de um item (se > 0)
+        - substituir: remove uma unidade de um item, adiciona de outro
+
+    Retorna o novo estado e uma descrição da ação para o log.
+    """
+    lista = list(itens.keys())
+    removiveis = [item for item in lista if estado[item] > 0]
+
+    # Define quais ações são possíveis no estado atual
+    acoes_possiveis = ["adicionar"]
+    if removiveis:
+        acoes_possiveis.append("remover")
+        if len(lista) > 1:
+            acoes_possiveis.append("substituir")
+
+    acao = rng.choice(acoes_possiveis)
+    novo_estado = dict(estado)
+
+    if acao == "adicionar":
+        item = rng.choice(lista)
+        novo_estado[item] += 1
+        descricao = f"adicionar({item})"
+
+    elif acao == "remover":
+        item = rng.choice(removiveis)
+        novo_estado[item] -= 1
+        descricao = f"remover({item})"
+
+    else:  # substituir
+        item_a = rng.choice(removiveis)
+        candidatos_b = [i for i in lista if i != item_a]
+        item_b = rng.choice(candidatos_b)
+        novo_estado[item_a] -= 1
+        novo_estado[item_b] += 1
+        descricao = f"substituir({item_a} -> {item_b})"
+
+    return novo_estado, descricao
+
+
+# ============================================================
+# Política de aceitação
+# ============================================================
+
+def aceitar(h_atual, h_novo):
+    """
+    Aceita o novo estado apenas se ele for estritamente melhor.
+    Política gulosa (hill climbing).
+    """
+    return h_novo < h_atual
 
 
 # ============================================================
 # Agente Alice
 # ============================================================
 
-def agente_alice(
-    ambiente,
-    max_iter=10000,
-    seed=None
-):
+def agente_alice(ambiente, max_iter=10000, seed=None):
     """
-    Agente heurístico estocástico.
+    Agente que busca minimizar h(s) por melhoria iterativa.
 
-    O ambiente contém:
+    Parâmetros
+    ----------
+    ambiente : dict
+        Dicionário com chaves "itens" (dict item->preco) e "orcamento" (float).
+    max_iter : int
+        Número máximo de iterações permitidas.
+    seed : int ou None
+        Semente para reprodutibilidade.
 
-    ambiente = {
-        "itens": {
-            item -> preco
-        },
-        "orcamento": valor
-    }
+    Retorno
+    -------
+    Resultado : namedtuple
+        Estado final, total, erro, iterações, status, log e entradas_log.
     """
 
-    #
-    # Inicialização do gerador pseudoaleatório
-    #
-
-    if seed is not None:
-        random.seed(seed)
-
-    #
-    # Percepção do ambiente
-    #
+    rng = random.Random(seed)
 
     itens = ambiente["itens"]
     orcamento = ambiente["orcamento"]
 
-    #
-    # Estado inicial do agente
-    #
+    # Estado inicial: cesta vazia
+    estado_atual = {item: 0 for item in itens}
+    h_atual = h(estado_atual, itens, orcamento)
 
-    estado = {
-        item: 0
-        for item in itens.keys()
-    }
+    # Registra o melhor estado encontrado ao longo da busca
+    melhor_estado = dict(estado_atual)
+    melhor_h = h_atual
 
-    #
-    # Variáveis da busca
-    #
-
-    total = 0.0
-    erro = orcamento
-    iteracoes = 0
     entradas_log = []
+    iteracoes = 0
 
-    #
-    # O agente inicia sem conhecimento útil.
-    #
-    # O comportamento inteligente emerge
-    # conforme os operadores heurísticos
-    # são implementados.
-    #
-    # TODO:
-    #
-    # implementar:
-    #
-    # - operadores de ação
-    # - geração de candidatos
-    # - heurística
-    # - melhoria iterativa
-    #
-    # Para registrar cada ação no log, adicione
-    # entradas à lista entradas_log durante a busca.
-    #
-    # Exemplo:
-    #
-    #   entradas_log.append(
-    #       f"[{i}] adicionar Melancia"
-    #       f" | TOTAL={total:.2f}"
-    #       f" | ERRO={erro:.2f}"
-    #   )
-    #
+    for iteracao in range(1, max_iter + 1):
 
-    for i in range(1, max_iter + 1):
-
-        iteracoes = i
-
-        #
-        # Critério de parada
-        #
-
-        if erro == 0.0:
+        # Critério de parada: solução ótima encontrada
+        if h_atual == 0:
             break
 
-    #
-    # Determinar status
-    #
+        iteracoes = iteracao
 
-    status = (
-        "OTIMA"
-        if erro == 0.0
-        else "APROXIMADA"
-    )
+        # Gera um estado vizinho por operador aleatório
+        estado_novo, descricao = gerar_vizinho(estado_atual, itens, rng)
+        h_novo = h(estado_novo, itens, orcamento)
+        total_novo = calcular_total(estado_novo, itens)
 
-    #
-    # Resultado final do agente
-    #
+        # Registra a ação no log
+        entradas_log.append(
+            f"[iter {iteracao}] {descricao} | "
+            f"h={h_novo:.2f} | total={total_novo:.2f}"
+        )
+
+        # Aplica política de aceitação
+        if aceitar(h_atual, h_novo):
+            estado_atual = estado_novo
+            h_atual = h_novo
+
+            # Atualiza melhor solução global
+            if h_atual < melhor_h:
+                melhor_estado = dict(estado_atual)
+                melhor_h = h_atual
+
+    # Define status final
+    status = "OTIMA" if melhor_h == 0 else "SUBOTIMA"
+    total_final = calcular_total(melhor_estado, itens)
 
     return Resultado(
-        estado=estado,
-        total=total,
-        erro=erro,
+        estado=melhor_estado,
+        total=round(total_final, 2),
+        erro=round(melhor_h, 2),
         iteracoes=iteracoes,
         status=status,
-        entradas_log=entradas_log,
-        log=""
+        log="",
+        entradas_log=entradas_log
     )
