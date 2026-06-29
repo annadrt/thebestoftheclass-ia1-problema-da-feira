@@ -16,7 +16,7 @@ from collections import namedtuple
 # Estrutura de retorno do agente
 Resultado = namedtuple(
     "Resultado",
-    ["estado", "total", "erro", "iteracoes", "status", "log", "entradas_log"]
+    ["estado", "total", "erro", "iteracoes", "status", "entradas_log", "log"]
 )
 
 
