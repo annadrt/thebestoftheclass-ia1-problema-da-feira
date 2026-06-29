@@ -67,12 +67,12 @@ def gerar_vizinho(estado, itens, rng):
     if acao == "adicionar":
         item = rng.choice(lista)
         novo_estado[item] += 1
-        descricao = f"adicionar({item})"
+        descricao = f"adicionar {item}"
 
     elif acao == "remover":
         item = rng.choice(removiveis)
         novo_estado[item] -= 1
-        descricao = f"remover({item})"
+        descricao = f"remover {item}"
 
     else:  # substituir
         item_a = rng.choice(removiveis)
@@ -80,7 +80,7 @@ def gerar_vizinho(estado, itens, rng):
         item_b = rng.choice(candidatos_b)
         novo_estado[item_a] -= 1
         novo_estado[item_b] += 1
-        descricao = f"substituir({item_a} -> {item_b})"
+        descricao = f"substituir {item_a} -> {item_b}"
 
     return novo_estado, descricao
 
@@ -151,8 +151,8 @@ def agente_alice(ambiente, max_iter=10000, seed=None):
 
         # Registra a ação no log
         entradas_log.append(
-            f"[iter {iteracao}] {descricao} | "
-            f"h={h_novo:.2f} | total={total_novo:.2f}"
+            f"[{iteracao}] {descricao} | "
+            f"TOTAL={total_novo:.2f} | ERRO={h_novo:.2f}"
         )
 
         # Aplica política de aceitação
@@ -166,7 +166,7 @@ def agente_alice(ambiente, max_iter=10000, seed=None):
                 melhor_h = h_atual
 
     # Define status final
-    status = "OTIMA" if melhor_h == 0 else "SUBOTIMA"
+    status = "OTIMA" if melhor_h == 0 else "APROXIMADA"
     total_final = calcular_total(melhor_estado, itens)
 
     return Resultado(
