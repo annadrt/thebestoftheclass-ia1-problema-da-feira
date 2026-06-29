@@ -407,7 +407,11 @@ Discuta adequação arquitetural, custo-benefício computacional, complexidade d
 
 Discuta grafos, planejamento, CSP, busca heurística, sistemas especialistas e otimização combinatória. Explique por que profissionais maduros em IA não devem negligenciar essas abordagens.
 
-> **Resposta:**
+> **Resposta: A relevância dos algoritmos clássicos não é histórica — é estrutural. LLMs resolvem bem problemas onde o espaço de entrada é ambíguo, vasto e difícil de modelar explicitamente. Para uma classe inteira de problemas com estrutura conhecida, os algoritmos clássicos são superiores em todas as dimensões que importam: garantia de resultado, custo computacional, interpretabilidade e auditabilidade.
+>
+> Algoritmos de grafos como A\* e Dijkstra encontram o caminho de menor custo com garantia de otimalidade — algo que nenhum LLM pode oferecer para navegação ou roteamento. Planejadores formais baseados em STRIPS e PDDL geram sequências de ações verificáveis para robótica e automação industrial, com provas de completude que estatística probabilística não reproduz. CSP (Constraint Satisfaction Problems) resolve alocação de recursos, escalonamento e configuração com restrições duras que precisam ser satisfeitas exatamente — não aproximadamente. Busca heurística, como a implementada no próprio agente Alice, resolve problemas de otimização combinatória como o Problema da Feira com custo computacional negligenciável e rastreabilidade total. Sistemas especialistas codificam conhecimento de domínio em regras verificáveis, essenciais em contextos onde a decisão precisa ser explicada — saúde, direito, finanças.
+>
+> O ponto central é que LLMs não substituem essas abordagens — eles as complementam onde o problema não tem estrutura explícita suficiente para modelagem formal. Profissionais que desconhecem algoritmos clássicos chegam ao mercado sem repertório para reconhecer quando o problema tem estrutura que torna a solução clássica dez vezes mais barata, rápida e auditável do que qualquer modelo fundacional. A consequência prática é sistematicamente usar o instrumento mais caro e opaco onde um algoritmo simples e determinístico teria resolvido com garantias formais.**
 
 ---
 
@@ -423,7 +427,19 @@ Discuta comportamento racional, busca heurística, representação simbólica, o
 
 Discuta memória, processamento, consumo energético, requisitos de hardware, tempo de execução e complexidade de inferência.
 
-> **Resposta:**
+> **Resposta: A diferença de ordem de grandeza entre os dois sistemas é tão grande que a comparação revela algo sobre escolha arquitetural, não apenas sobre eficiência.
+>
+> **Memória:** o agente Alice mantém em memória apenas o estado atual da cesta — um dicionário de 5 pares item→quantidade — e a lista de entradas de log. O consumo total é da ordem de kilobytes. Um LLM de fronteira como o GPT-4 requer entre 300 GB e 700 GB de memória só para armazenar os pesos em meia precisão (fp16), exigindo múltiplas GPUs de alta capacidade em paralelo.
+>
+> **Processamento e complexidade de inferência:** cada iteração do agente executa uma seleção aleatória, uma atualização de dicionário e uma subtração — operações O(1) em CPU comum. A complexidade total é O(max\_iter), com max\_iter tipicamente abaixo de 1000. A inferência em um LLM executa um forward pass por camada de atenção com complexidade O(n²) no comprimento do contexto, repetido por dezenas ou centenas de camadas, sobre bilhões de parâmetros — inteiramente em GPUs especializadas.
+>
+> **Hardware:** o agente roda em qualquer computador com Python instalado, sem GPU, sem acelerador, sem infraestrutura. Um LLM de fronteira exige servidores com múltiplas GPUs A100 ou H100, cada uma custando entre R$50.000 e R$200.000, além de refrigeração dedicada e link de alta velocidade entre dispositivos.
+>
+> **Tempo de execução:** com seed 42 e orçamento de R$20,00, o agente converge para OTIMA em menos de 1 milissegundo em hardware comum. A latência de inferência de um LLM moderno via API varia de 1 a 30 segundos dependendo do tamanho do contexto e da carga do servidor.
+>
+> **Consumo energético:** uma execução completa do agente consome energia da ordem de microwatts por milissegundo — praticamente imperceptível. Uma única query a um LLM de fronteira consome entre 0,001 e 0,01 kWh. Multiplicado por bilhões de queries diárias em escala global, o consumo acumulado é equivalente ao de países inteiros.
+>
+> A comparação não é sobre qual sistema é "melhor" em abstrato — é sobre adequação. Para o Problema da Feira, usar um LLM seria gastar um milhão de vezes mais energia para obter uma resposta menos auditável, com latência maior e sem garantia de resultado correto.**
 
 ---
 
@@ -504,7 +520,56 @@ Total(Cesta, 20.00)
 
 Discuta representação simbólica, inferência lógica, verificabilidade e interpretabilidade.
 
-> **Resposta:**
+> **Resposta: Em cálculo de predicados de primeira ordem, o Problema da Feira é representado definindo os objetos do domínio, os predicados que descrevem suas propriedades e relações, e as regras de inferência que governam as transições de estado.
+>
+> **Objetos:** `Alice` (o agente), `Laranja`, `Banana`, `Melancia`, `Melão`, `Manga` (itens), `Cesta` (estado atual).
+>
+> **Predicados de estado:**
+> ```prolog
+> Preco(Laranja, 0.50)
+> Preco(Banana, 0.05)
+> Preco(Melancia, 3.00)
+> Preco(Melao, 2.50)
+> Preco(Manga, 0.75)
+>
+> Quantidade(Laranja, 3)
+> Quantidade(Banana, 10)
+> Quantidade(Melancia, 2)
+>
+> Orcamento(Alice, 20.00)
+> Total(Cesta, 19.50)
+> ```
+>
+> **Predicado derivado — cálculo do total:**
+> ```prolog
+> Total(Cesta, T) ←
+>     ∑ᵢ [ Quantidade(Itemᵢ, Qᵢ) ∧ Preco(Itemᵢ, Pᵢ) ∧ T = Qᵢ × Pᵢ ]
+> ```
+>
+> **Predicado de objetivo:**
+> ```prolog
+> Otimo(Cesta) ← Orcamento(Alice, O) ∧ Total(Cesta, O)
+> ```
+>
+> **Operadores como axiomas de ação:**
+> ```prolog
+> % adicionar: pré-condição sempre satisfeita; efeito incrementa quantidade
+> Adicionar(Item) ∧ Quantidade(Item, Q) → Quantidade'(Item, Q + 1)
+>
+> % remover: pré-condição exige quantidade > 0
+> Remover(Item) ∧ Quantidade(Item, Q) ∧ Q > 0 → Quantidade'(Item, Q − 1)
+>
+> % substituir: pré-condição exige quantidade > 0 do item removido
+> Substituir(ItemA, ItemB) ∧ Quantidade(ItemA, Q) ∧ Q > 0
+>     → Quantidade'(ItemA, Q − 1) ∧ Quantidade'(ItemB, Q_B + 1)
+> ```
+>
+> **Heurística como predicado:**
+> ```prolog
+> Erro(Cesta, E) ← Orcamento(Alice, O) ∧ Total(Cesta, T) ∧ E = |O − T|
+> ```
+>
+> Essa representação torna o problema verificável formalmente: dado qualquer estado da cesta, um motor de inferência pode derivar `Total`, verificar `Otimo` e determinar se a pré-condição de cada operador está satisfeita — sem ambiguidade. A interpretabilidade é total: cada fato no estado é um predicado legível, e cada transição é uma regra com pré-condições e efeitos explícitos. Isso contrasta com representações latentes de redes neurais, onde não existe correspondência direta entre dimensões do vetor de estado e conceitos semânticos como "quantidade de Banana" ou "distância ao orçamento".**
 
 ---
 
