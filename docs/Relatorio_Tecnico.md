@@ -7,7 +7,7 @@
 >
 > **Integrantes:**  Anna Leticia do Nascimento Soares Duarte, Alice Mariana de Souza, Gustavo de Morais Lopes e Vitória Eloise de Assis Rocha
 >
-> **Repositório:**  URL do repositório privado 
+> **Repositório:**  <https://github.com/annadrt/thebestoftheclass-ia1-problema-da-feira> 
 >
 > **Data de entrega:** 22 de junho de 2026
 
@@ -320,8 +320,76 @@ Propriedades do Ambiente de Tarefa
 
 ## 8. Resultados Experimentais
 
- Apresente os resultados obtidos com experimento.py.
- Inclua tabelas, gráficos gerados por visualizacao.py e análise dos logs. Discuta o efeito de seeds, orçamentos e limites de iterações sobre a qualidade da solução. 
+Os experimentos foram conduzidos com `experimento.py`, executando o agente Alice para todas as combinações de 6 orçamentos × 3 limites de iterações × 10 seeds, totalizando 180 execuções individuais. Os resultados foram exportados para `src/data/resultados_experimento.csv` e os gráficos gerados por `visualizacao.py`.
+
+---
+
+### 8.1 Tabela de Resultados Agregados
+
+| Orçamento | max\_iter | % Ótimas | Erro médio | Erro mín | Erro máx | DP erro | Iter médio |
+|----------:|----------:|---------:|-----------:|---------:|---------:|--------:|-----------:|
+| R$ 10,00  |       100 |    90,0% |     0,0200 |   0,0000 |   0,2000 |  0,0600 |       50,3 |
+| R$ 10,00  |     1.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       55,6 |
+| R$ 10,00  |    10.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       55,6 |
+| R$ 15,00  |       100 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       43,1 |
+| R$ 15,00  |     1.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       43,1 |
+| R$ 15,00  |    10.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       43,1 |
+| R$ 20,00  |       100 |    80,0% |     0,0100 |   0,0000 |   0,0500 |  0,0200 |       65,3 |
+| R$ 20,00  |     1.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       67,2 |
+| R$ 20,00  |    10.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       67,2 |
+| R$ 25,00  |       100 |    80,0% |     0,0300 |   0,0000 |   0,2500 |  0,0748 |       60,6 |
+| R$ 25,00  |     1.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       61,7 |
+| R$ 25,00  |    10.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       61,7 |
+| R$ 30,00  |       100 |    90,0% |     0,0050 |   0,0000 |   0,0500 |  0,0150 |       68,7 |
+| R$ 30,00  |     1.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       71,1 |
+| R$ 30,00  |    10.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |       71,1 |
+| R$ 50,00  |       100 |    20,0% |     0,2150 |   0,0000 |   0,7000 |  0,2169 |       99,2 |
+| R$ 50,00  |     1.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |      124,5 |
+| R$ 50,00  |    10.000 |   100,0% |     0,0000 |   0,0000 |   0,0000 |  0,0000 |      124,5 |
+
+---
+
+### 8.2 Gráficos
+
+**Gráfico 1 — Curva de convergência de h(s) (orçamento R$20,00, seed=0)**
+
+![Convergência de h(s)](../src/data/graficos/convergencia.png)
+
+O agente parte de h(s) ≈ 17,5 (cesta vazia) e reduz o erro progressivamente ao longo de ~50 iterações até atingir h(s) = 0. As oscilações na curva refletem candidatos gerados mas rejeitados — ações registradas no log independentemente da aceitação.
+
+---
+
+**Gráfico 2 — Comparação de curvas entre seeds distintas (orçamento R$20,00)**
+
+![Comparação entre seeds](../src/data/graficos/comparacao_seeds.png)
+
+As cinco curvas exibem o mesmo padrão de decaimento geral, mas com trajetórias distintas: seed=2 converge por volta da iteração 30, enquanto seed=1 oscila próximo de h≈1–3 por mais de 80 iterações antes de atingir h=0. Isso evidencia o impacto da seed sobre o caminho percorrido no espaço de estados sem comprometer a qualidade final da solução, já que todas as seeds convergem para OTIMA com max\_iter=1000.
+
+---
+
+**Gráfico 3 — Erro médio por orçamento (max\_iter=100)**
+
+![Distribuição do erro](../src/data/graficos/distribuicao_erro.png)
+
+Com limite de 100 iterações, R$50,00 é o orçamento mais difícil: erro médio de 0,215 e desvio padrão de 0,217, com erro máximo de R$0,70 em uma das execuções. R$15,00 é o único orçamento que atinge 100% de soluções ótimas mesmo com max\_iter=100, pois sua decomposição em múltiplos de R$0,05 (Banana) é facilmente alcançável em poucas iterações.
+
+---
+
+**Gráfico 4 — Taxa de soluções ótimas por orçamento e max\_iter**
+
+![Taxa de soluções ótimas](../src/data/graficos/taxa_otimas.png)
+
+Com max\_iter ≥ 1000, o agente atinge 100% de soluções ótimas em todos os orçamentos testados. Com max\_iter=100, a taxa cai para 20% em R$50,00 — o agente não consegue convergir no tempo disponível para orçamentos maiores que exigem cestas com maior número de itens. As curvas de max\_iter=1000 e max\_iter=10000 são sobrepostas, indicando que 1000 iterações já é orçamento computacional suficiente para este ambiente.
+
+---
+
+### 8.3 Análise
+
+**Efeito do orçamento.** Orçamentos maiores requerem cestas com mais itens ou quantidades maiores, aumentando o número médio de iterações necessárias para convergir. R$50,00 exige em média 124,5 iterações contra 43,1 de R$15,00. Isso é consistente com a expectativa de que o espaço de estados relevante cresce com o orçamento.
+
+**Efeito do limite de iterações.** O limiar crítico está entre max\_iter=100 e max\_iter=1000. Acima de 1000 iterações, o agente converge para solução ótima em 100% das execuções para todos os orçamentos testados. Abaixo disso, orçamentos mais elevados sofrem degradação significativa — especialmente R$50,00, com apenas 20% de taxa ótima.
+
+**Efeito da seed.** A seed controla o caminho explorado no espaço de estados mas não afeta a qualidade final da solução quando o orçamento computacional é suficiente. Com max\_iter=1000, todas as 10 seeds atingem OTIMA para todos os orçamentos, confirmando que o agente é robusto à variação de seed dentro desse limite. O desvio padrão do erro cai a zero para max\_iter ≥ 1000, indicando convergência determinística na prática.
 
 ---
 
