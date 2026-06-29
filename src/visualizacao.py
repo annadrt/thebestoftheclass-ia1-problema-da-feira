@@ -47,7 +47,7 @@ def parsear_h_do_log(caminho):
     Retorna uma lista de floats, um por iteração registrada.
     """
     valores_h = []
-    padrao = re.compile(r"h=([\d.]+)")
+    padrao = re.compile(r"ERRO=([\d.]+)")
 
     with open(caminho, encoding="utf-8") as f:
         for linha in f:
@@ -77,19 +77,45 @@ def listar_logs(orcamento=None, seed=None):
 
 
 def carregar_csv_experimento():
-    """Lê o CSV de resultados do experimento."""
-    dados = []
+    """Lê o CSV de execuções individuais e agrega por (orcamento, max_iter)."""
+    import math
+
+    runs = []
     with open(CSV_EXPERIMENTO, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
-            dados.append({
-                "orcamento":       float(row["orcamento"]),
-                "max_iter":        int(row["max_iter"]),
-                "n_execucoes":     int(row["n_execucoes"]),
-                "taxa_otimas_pct": float(row["taxa_otimas_pct"]),
-                "erro_medio":      float(row["erro_medio"]),
-                "desvio_padrao":   float(row["desvio_padrao"]),
-                "iter_medio":      float(row["iter_medio"])
+            runs.append({
+                "orcamento": float(row["orcamento"]),
+                "max_iter":  int(row["max_iter"]),
+                "seed":      int(row["seed"]),
+                "erro":      float(row["erro"]),
+                "iteracoes": int(row["iteracoes"]),
+                "status":    row["status"]
             })
+
+    grupos = {}
+    for r in runs:
+        chave = (r["orcamento"], r["max_iter"])
+        grupos.setdefault(chave, []).append(r)
+
+    dados = []
+    for (orcamento, max_iter), grupo in sorted(grupos.items()):
+        erros     = [r["erro"] for r in grupo]
+        iteracoes = [r["iteracoes"] for r in grupo]
+        otimas    = sum(1 for r in grupo if r["status"] == "OTIMA")
+        n         = len(grupo)
+        media     = sum(erros) / n
+        dp        = math.sqrt(sum((e - media) ** 2 for e in erros) / n)
+
+        dados.append({
+            "orcamento":       orcamento,
+            "max_iter":        max_iter,
+            "n_execucoes":     n,
+            "taxa_otimas_pct": round(100 * otimas / n, 1),
+            "erro_medio":      round(media, 4),
+            "desvio_padrao":   round(dp, 4),
+            "iter_medio":      round(sum(iteracoes) / n, 1)
+        })
+
     return dados
 
 
