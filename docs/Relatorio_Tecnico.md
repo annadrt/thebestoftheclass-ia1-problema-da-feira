@@ -39,7 +39,7 @@
 
 ## 1. Introdução
 
- Este relatório descreve a implementação e análise de um agente inteligente para o Problema da Feira, cujo objetivo é identificar uma combinação de itens de mercado cujo valor total seja igual ou o mais próximo possível de um orçamento pré-definido. O problema pertence à classe dos problemas de otimização combinatória, sendo modelado formalmente como um problema de busca em espaço de estados e resolvido por meio de um agente heurístico estocástico.
+Este relatório descreve a implementação e análise de um agente inteligente para o Problema da Feira, cujo objetivo é identificar uma combinação de itens de mercado cujo valor total seja igual ou o mais próximo possível de um orçamento pré-definido. O problema pertence à classe dos problemas de otimização combinatória, sendo modelado formalmente como um problema de busca em espaço de estados e resolvido por meio de um agente heurístico estocástico.
 O trabalho dialoga diretamente com os fundamentos de Inteligência Artificial apresentados em Russell e Norvig (2021), em especial com os capítulos dedicados a agentes racionais, formulação de problemas de busca, busca local e heurísticas. O agente implementado, denominado Alice, opera em um ambiente totalmente observável, estático, determinístico e discreto, executando um ciclo percepção–deliberação–ação orientado pela minimização de uma função heurística de erro absoluto.
 Além do interesse técnico-algorítmico, a atividade possui dimensão pedagógica ampla: permite discutir por que abordagens de IA clássica — simbólicas, heurísticas e auditáveis — continuam relevantes e, em muitos contextos práticos, preferíveis a modelos de aprendizado profundo. Questões de sustentabilidade computacional, interpretabilidade (XAI), governança algorítmica e regulamentação — incluindo o PL 2688/2025 — são discutidas ao longo do relatório à luz da implementação realizada.
 Os objetivos específicos desta atividade são:
@@ -177,7 +177,7 @@ perceber(s_t)
 
 ## 3. Representação em Grafo
 
- O espaço de estados do Problema da Feira é estruturado como um grafo implícito e direcionado, no qual cada nó representa um estado (configuração da cesta) e cada aresta representa a aplicação de um operador (ação do agente). O grafo é denominado implícito porque não é construído explicitamente na memória: os sucessores de um estado são gerados sob demanda durante a busca. 
+O espaço de estados do Problema da Feira é estruturado como um grafo implícito e direcionado, no qual cada nó representa um estado (configuração da cesta) e cada aresta representa a aplicação de um operador (ação do agente). O grafo é denominado implícito porque não é construído explicitamente na memória: os sucessores de um estado são gerados sob demanda durante a busca. 
  
 3.1 Estrutura do Grafo:
 
@@ -414,7 +414,7 @@ A divisão estrita entre a infraestrutura do ambiente (main.py), a inteligência
 
 ## 10. Conclusão
 
- Este trabalho apresentou a implementação e análise de um agente heurístico estocástico para o Problema da Feira, modelado formalmente como um problema de busca em espaço de estados. O agente Alice opera por melhoria iterativa guiada pela heurística h(s) = |ORÇAMENTO − TOTAL|, selecionando ações aleatoriamente e aceitando apenas as que reduzem o erro.
+Este trabalho apresentou a implementação e análise de um agente heurístico estocástico para o Problema da Feira, modelado formalmente como um problema de busca em espaço de estados. O agente Alice opera por melhoria iterativa guiada pela heurística h(s) = |ORÇAMENTO − TOTAL|, selecionando ações aleatoriamente e aceitando apenas as que reduzem o erro.
 Os experimentos demonstraram que o agente converge consistentemente para soluções ótimas (h = 0) para orçamentos variados, com número de iterações dependente da seed e da decomposição do orçamento nos preços disponíveis. O registro estruturado da trajetória viabiliza interpretabilidade, rastreabilidade e auditabilidade — propriedades essenciais no contexto do marco regulatório de IA em discussão no Brasil.
 Os principais aprendizados desta atividade foram:
 a modelagem formal de um problema real como espaço de estados é o fundamento de qualquer solução algorítmica em IA;
