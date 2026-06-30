@@ -747,22 +747,17 @@ Discuta representação simbólica, homoiconicidade, processamento de listas, ma
 ## 40. Como o problema da feira poderia ser representado em Lisp ou Scheme?
 
 Discuta representação de estados como listas, manipulação simbólica, recursão, funções de transformação e operadores simbólicos. Exemplos esperados:
-
 ```lisp
 (estado
   (laranja 3)
   (banana 10)
 )
 ```
-
 ou:
-
 ```lisp
 (adicionar melancia estado)
 ```
-
 Discuta vantagens dessa representação para IA simbólica.
-
 > **Resposta:**
 >Em Lisp, o problema foge do controle de estado global e adota manipulação simbólica pura via listas. O estado seria uma "Association List":
 
