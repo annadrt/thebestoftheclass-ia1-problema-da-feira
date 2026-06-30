@@ -151,7 +151,7 @@ Discuta especificamente:
 * governança de IA.
 
 > **Resposta:
-Explainable Artificial Intelligence é uma área da IA que busca tornar as decisões dos sistemas compreensíveis para humanos. Seu objetivo é permitir que usuários, desenvolvedores e reguladores entendam como e por que uma decisão foi tomada.
+  Explainable Artificial Intelligence é uma área da IA que busca tornar as decisões dos sistemas compreensíveis para humanos. Seu objetivo é permitir que usuários, desenvolvedores e reguladores entendam como e por que uma decisão foi tomada.
 As discussões do PL 2688/2025 e do futuro marco regulatório brasileiro enfatizam a necessidade de transparência, explicação e responsabilização em sistemas de IA. Esta atividade antecipa esses desafios ao utilizar um agente cujas decisões podem ser analisadas e justificadas.
 Interpretabilidade, Transparência e Explicabilidade
 Interpretabilidade: o funcionamento interno do agente é compreensível, pois suas regras e cálculos são explícitos.
