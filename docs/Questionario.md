@@ -651,7 +651,7 @@ Analise interpretabilidade, custo computacional, necessidade de dados, explicabi
 > **Resposta:**
 
 >Simbólica: Baseada em lógica e busca. Interpretabilidade/Explicabilidade: Altíssima (é possível rastrear cada regra ativada). Necessidade de Dados: Nula (requer apenas as regras do problema). Custo/Eficiência: Muito eficiente para problemas restritos, mas sofre de explosão combinatória em larga escala.
->Conexionista: Baseada em ajuste de pesos por tentativa e erro (Aprendizado por Reforço). Interpretabilidade: Baixa (caixa-preta). Necessidade de Dados: Altíssima (precisa de milhares de simulações). Custo/Eficiência: Custo de treino elevadíssimo; excessivo para um problema de otimização discreta simples.
+>Conexionista: Baseada em ajuste de pesos por tentativa e erro (Aprendizado por Reforço). Interpretabilidade: Baixa (caixa-preta). Necessidade de Dados: Altíssima (precisa de milhares de simulações). Custo/Eficiencia:  Custo de treino elevadíssimo; excessivo para um problema de otimização discreta simples.
 >Probabilística: Baseada em atualização de crenças (Bayes). Interpretabilidade: Média/Alta (as dependências causais são claras). Necessidade de Dados: Moderada (precisa de histórico para calibrar as distribuições iniciais). Custo: Moderado.
 
 ## 33. Como uma rede neural poderia tentar resolver este problema?
