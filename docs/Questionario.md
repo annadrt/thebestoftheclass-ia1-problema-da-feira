@@ -588,7 +588,7 @@ Justifique analisando representação explícita do estado, operadores, ações,
 
 >Sim, o agente pode ser considerado parcialmente (ou totalmente) simbólico. A abordagem simbólica na IA baseia-se na premissa de que a inteligência é alcançada através da manipulação de símbolos explícitos baseados em regras. 
 >Representação explícita: O estado do problema é representado de forma legível (ex: quantidades exatas de maçãs e bananas na sacola, peso atual, valor atual).
->Operadores e Ações: As ações são discretas e bem definidas (ex: `adicionar_item`, `remover_item`), alterando o estado passo a passo mediante regras lógicas (ex: restrição de peso máximo).
+>Operadores e Ações: As ações são discretas e bem definidas (ex: `adicionar_item`, `remover_item`), alterando o estado passo a passo mediante regras logicas (ex: restrição de peso maximo).
 >Transições e Logs: A árvore de busca gera um rastro transparente. É possível ler um log dizendo "Estado A -> Adicionou Maçã -> Estado B".
 >Isso contrasta radicalmente com representações neurais distribuídas, onde o estado e as regras não são programados, mas aprendidos e codificados em *embeddings* e matrizes de pesos (representações latentes). Em uma rede neural, um estado seria um vetor denso contínuo (ex: `[0.45, -0.12, 0.88]`), cujas dimensões individuais não possuem um significado semântico direto e interpretável.
 
