@@ -798,7 +798,7 @@ Uma	formação	baseada	exclusivamente	em	frameworks,	APIs	e	fine	tuning	de	LLMs	
 > - Eficiência:	sem	saber	reconhecer	quando	um	problema	tem	estrutura	simbólica	clara	(como	o Problema	da	Feira),	o	profissional	tende	a	resolver	tudo	com	a	ferramenta	mais	cara	disponível
 > - Soberania	tecnológica:	profissionais	que	só	sabem	consumir	LLMs	de	terceiros	via	API	ficam estruturalmente	dependentes	de	poucos	provedores	(Questão	20),	sem	capacidade	de	construir alternativas	locais,	leves e	auditáveis	quando	necessário.
 > - Capacidade	de	inovação:	avanços	históricos	em	IA	frequentemente	vêm	da	combinação inesperada	de	paradigmas	(como	discutido	na	Questão	42)	—	quem	só	conhece	um	paradigma	não consegue	propor	essas	combinações.
-> - Compreensão	profunda:	no	fim,	entender	IA	como	campo	científico	—	não	apenas	como	conjunto de	produtos	—	exige	trânsito	entre	lógica,	probabilidade,	otimização	e	representação,	exatamente o	espectro	que	este	exercício	(Problema	da	Feira)	foi	desenhado	para	cobrir
+> - Compreensão	profunda:	no	fim,	entender	IA	como	campo	científico	—	não	apenas	como	conjunto de	produtos	—	exige	trânsito	entre	lógica,	probabilidade,	otimização	e	representação,	exatamente o	espectro	que	este	exercício	(Problema	da	Feira)	foi	desenhado	para	cobrir.
 
 ---
 
@@ -832,7 +832,7 @@ Discuta criticamente encontrar solução, aproximar solução, otimizar, satisfa
 > - Minimizar	erro:	é	exatamente	o	critério	usado	pelo	nosso	agente	—	resolver	=	encontrar	o	estado de	menor	h(s)	alcançável	dentro	do	tempo	disponível.
 > - Comportamento	racional	(visão	do	AIMA):	resolver,	sob	essa	ótica,	não	é	nem	sobre	encontrar um	estado	específico,	mas	sobre	o	agente	agir	da	melhor	forma	possível	dado	o	que	percebe e	o	tempo	que	tem	—	uma	noção	de	solução	centrada	no	processo	de	decisão,	não	apenas	no resultado	final.
 
-> A	consequência	prática	é	que	perguntar	“o	problema	foi	resolvido?”	exige	primeiro	perguntar	“resolvido segundo	qual	critério?”	—	um	sistema	pode	ser	considerado	bem-sucedido	sob	a	ótica	de	racionalidade limitada	(fez	o	melhor	possível	com	os	recursos	disponíveis)	mesmo	sem	ter	encontrado	a	solução matematicamente	ótima
+> A	consequência	prática	é	que	perguntar	“o	problema	foi	resolvido?”	exige	primeiro	perguntar	“resolvido segundo	qual	critério?”	—	um	sistema	pode	ser	considerado	bem-sucedido	sob	a	ótica	de	racionalidade limitada	(fez	o	melhor	possível	com	os	recursos	disponíveis)	mesmo	sem	ter	encontrado	a	solução matematicamente	ótima.
 
 ---
 
@@ -864,7 +864,7 @@ Discuta comportamento observável, racionalidade, cognição, inferência, apren
 
 > A	questão	filosófica	central	é	que	não	temos,	hoje,	nenhum	método	para	verificar	de	fora	se	um sistema	“possui”	inteligência	no	sentido	forte	(com	experiência	subjetiva	genuína)	—	esse	é	o chamado	“problema das	outras	mentes”,	que	já	é	difícil	até	entre	humanos	(não	podemos	verificar diretamente	a	consciência	alheia,	apenas	inferi-la	por	analogia	comportamental).	Por	isso,	toda avaliação	prática	de	IA	—	incluindo	o próprio	Teste	de	Turing	—	é	necessariamente comportamental/funcional,	não	ontológica:	avalia-se	o	que	o	sistema	faz,	não	o	que	ele	é internamente	em	termos	de	experiência.
 
-> Isso	significa	que	a	distinção	entre	“simular”	e	“possuir”	inteligência	é	epistemologicamente	importante mas	praticamente	inacessível	—	podemos	discutir	racionalidade,	inferência	e	aprendizagem com rigor	científico,	mas	afirmações	sobre	consciência	ou	compreensão	genuína	permanecem,	por	enquanto, fora	do	alcance	de	verificação	empírica
+> Isso	significa	que	a	distinção	entre	“simular”	e	“possuir”	inteligência	é	epistemologicamente	importante mas	praticamente	inacessível	—	podemos	discutir	racionalidade,	inferência	e	aprendizagem com rigor	científico,	mas	afirmações	sobre	consciência	ou	compreensão	genuína	permanecem,	por	enquanto, fora	do	alcance	de	verificação	empírica.
 
 ---
 
@@ -892,7 +892,7 @@ Discuta estado interno, histórico, aprendizagem, trajetória, representação t
 
 > Mas	essa	memória	é	local	e	efêmera:	existe	apenas	durante	uma	execução	(o	estado	é	reinicializado do	zero	a	cada	chamada	de	agente_alice() )	e	não	constitui	retenção	de	experiência	entre	execuções
 
-> Isso	mostra	que	existem	graus	de	“inteligência	sem	memória	persistente”:	um	sistema	pode	exibir comportamento	localmente	racional	usando	apenas	memória	de	curtíssimo	prazo	(o	estado	atual),	sem qualquer histórico	acumulado	de	longo	prazo.	LLMs	ilustram	um	meio-termo	interessante:	têm memória	de	trabalho	dentro	de	uma	janela	de	contexto	(análoga	à	memória	de	curto	prazo	do	nosso agente),	mas,	sem mecanismos	externos	(como	bases	de	dados	de	memória	ou	fine-tuning),	não	retêm experiência	entre	conversas	—	uma	limitação	estrutural	semelhante	à	do	nosso	agente	entre	execuções  diferentes
+> Isso	mostra	que	existem	graus	de	“inteligência	sem	memória	persistente”:	um	sistema	pode	exibir comportamento	localmente	racional	usando	apenas	memória	de	curtíssimo	prazo	(o	estado	atual),	sem qualquer histórico	acumulado	de	longo	prazo.	LLMs	ilustram	um	meio-termo	interessante:	têm memória	de	trabalho	dentro	de	uma	janela	de	contexto	(análoga	à	memória	de	curto	prazo	do	nosso agente),	mas,	sem mecanismos	externos	(como	bases	de	dados	de	memória	ou	fine-tuning),	não	retêm experiência	entre	conversas	—	uma	limitação	estrutural	semelhante	à	do	nosso	agente	entre	execuções  diferentes.
 
 ---
 
@@ -906,7 +906,7 @@ Discuta heurísticas como conhecimento especializado, experiência embutida, apr
 
 > Isso	ilustra	por	que	heurísticas,	de	forma	geral,	são	uma	forma	de	conhecimento	humano comprimido:	alguém	com	entendimento	do	problema	decidiu	que	esse	cálculo	específico	é	uma	boa aproximação	de	“o	quão perto	estou	de	uma	boa	solução”,	e	codificou	esse	julgamento	em	uma	função simples	e	barata	de	calcular.	É,	ao	mesmo	tempo,	uma	aproximação	(não	garante	encontrar	a	melhor cesta	possível,	apenas	guia	a	busca em	uma	direção	promissora)	e	uma	forma	de	inferência	imperfeita —	o	agente	nunca	sabe	com	certeza	se	uma	escolha	aceita	hoje	não	vai	bloquear	uma	escolha	melhor amanhã	(problema	clássico	de	mínimos	locais	em	hill	climbing).
 
-> Esse	é	exatamente	o	conceito	de	racionalidade	limitada	(Questão	1):	heurísticas	existem	porque calcular	a	solução	exata	por	busca	exaustiva	é	inviável	(Questão	6),	então	usamos	conhecimento	prático e	aproximado —	uma	“regra	de	bolso”	bem	desenhada	—	para	tomar	decisões	boas	o	suficiente	dentro de	restrições	reais	de	tempo	e	computação.	Nesse	sentido,	toda	heurística	é	conhecimento	humano traduzido	em	código
+> Esse	é	exatamente	o	conceito	de	racionalidade	limitada	(Questão	1):	heurísticas	existem	porque calcular	a	solução	exata	por	busca	exaustiva	é	inviável	(Questão	6),	então	usamos	conhecimento	prático e	aproximado —	uma	“regra	de	bolso”	bem	desenhada	—	para	tomar	decisões	boas	o	suficiente	dentro de	restrições	reais	de	tempo	e	computação.	Nesse	sentido,	toda	heurística	é	conhecimento	humano traduzido	em	código.
 
 ---
 
@@ -982,7 +982,7 @@ Discuta emergência, sistemas complexos, comportamento coletivo, algoritmos simp
 > - Swarm	intelligence	(otimização	por	colônia	de	formigas,	enxame	de	partículas):	cada	agente individual	segue	regras	triviais	(seguir	feromônio,	mover-se	em	direção	à	melhor	posição	vizinha), e	o	comportamento	coletivo	resultante	resolve	problemas	de	otimização	complexos.
 > - Algoritmos	evolutivos:	regras	simples	de	seleção	e	variação,	aplicadas	repetidamente	sobre	uma população,	produzem	soluções	sofisticadas	sem	que	nenhuma	“inteligência	de	projeto”	central decida	a	solução	final.
 
-> O	padrão	comum	é:	regra	local	simples	+	repetição	+	um	critério	de	seleção/aceitação	é suficiente	para	produzir	comportamento	que	parece	inteligente	em	um	nível	agregado	—	até	onde	isso pode	ir	é	uma	questão	em	aberto,	mas	o	Problema	da	Feira	mostra,	em	escala	pequena,	que	a	resposta	é “mais	longe	do	que	a	intuição	sugere”:	nenhuma	regra	individual	no	solucao.py	é	sofisticada,	mas	o comportamento	agregado resolve	um	problema	real	de	forma	eficiente
+> O	padrão	comum	é:	regra	local	simples	+	repetição	+	um	critério	de	seleção/aceitação	é suficiente	para	produzir	comportamento	que	parece	inteligente	em	um	nível	agregado	—	até	onde	isso pode	ir	é	uma	questão	em	aberto,	mas	o	Problema	da	Feira	mostra,	em	escala	pequena,	que	a	resposta	é “mais	longe	do	que	a	intuição	sugere”:	nenhuma	regra	individual	no	solucao.py	é	sofisticada,	mas	o comportamento	agregado resolve	um	problema	real	de	forma	eficiente.
 
 ---
 
@@ -1000,6 +1000,6 @@ Justifique criticamente sua resposta.
 
 > A	epistemologia,	por	sua	vez,	não	é	um	componente	técnico	do	campo,	mas	a	lente	que	permite perguntar	criticamente	“o	que	conta	como	resolver,	saber,	ou	compreender”	— sem	ela,	IA	vira apenas	engenharia	sem	reflexão	sobre	seus	próprios	limites	e	pressupostos.
 
-> Minha	posição é	que	IA	é	fundamentalmente	um	problema	de	representação	e inferência	sob	restrição	computacional	—	estatística	e	linguagem	são	instrumentos	poderosos	para subproblemas	específicos	(percepção,	processamento	de	linguagem	natural),	não	a	essência	do	campo; e	cognição	e	epistemologia	são	as	lentes	necessárias	para	avaliar	criticamente	o	que	essas representações	e	inferências	realmente	produzem.	É	exatamente	essa	multiplicidade	de	facetas	—	e	não uma	resposta	única	—	que	torna	a	IA	um	campo	de	engenharia	genuinamente	interdisciplinar,	e	é exatamente	o	que	este	exercício,	comparando	uma solução	simbólica	simples	com	o	paradigma dominante	dos	LLMs,	foi	desenhado	para	evidenciar
+> Minha	posição é	que	IA	é	fundamentalmente	um	problema	de	representação	e inferência	sob	restrição	computacional	—	estatística	e	linguagem	são	instrumentos	poderosos	para subproblemas	específicos	(percepção,	processamento	de	linguagem	natural),	não	a	essência	do	campo; e	cognição	e	epistemologia	são	as	lentes	necessárias	para	avaliar	criticamente	o	que	essas representações	e	inferências	realmente	produzem.	É	exatamente	essa	multiplicidade	de	facetas	—	e	não uma	resposta	única	—	que	torna	a	IA	um	campo	de	engenharia	genuinamente	interdisciplinar,	e	é exatamente	o	que	este	exercício,	comparando	uma solução	simbólica	simples	com	o	paradigma dominante	dos	LLMs,	foi	desenhado	para	evidenciar.
 
 ---
