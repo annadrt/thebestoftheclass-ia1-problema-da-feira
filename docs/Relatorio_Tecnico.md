@@ -220,7 +220,7 @@ Com 5 itens e quantidades potencialmente ilimitadas, o espaço de estados é tec
 
 ## 4. Busca Não Informada
 
-Algoritmos de busca não informada — como BFS (Busca em Largura) e DFS (Busca em Profundidade) — exploram o espaço de estados sem utilizar conhecimento do domínio além da definição do problema. Embora garantam completude e, em alguns casos, otimalidade, sua aplicação ao Problema da Feira é impraticável devido à dimensão do espaço de busca.
+Algoritmos de busca não informada, como BFS (Busca em Largura) e DFS (Busca em Profundidade), exploram o espaço de estados sem utilizar conhecimento do domínio além da definição do problema. Embora garantam completude e, em alguns casos, otimalidade, sua aplicação ao Problema da Feira é impraticável devido à dimensão do espaço de busca.
 4.1 BFS — Busca em Largura
 A BFS expandiria os nós por nível de profundidade, garantindo que a solução de menor caminho seja encontrada primeiro. Contudo, o fator de ramificação b do grafo do Problema da Feira é da ordem de 2|I| + |I|² ≈ 35 (10 ações de adicionar/remover × 5 itens, mais 25 substituições). A memória necessária para manter a fronteira de busca cresce como O(b^d), onde d é a profundidade da solução. Para d = 100, a fronteira teria mais de 35^100 nós — completamente inviável.
 4.2 DFS — Busca em Profundidade
@@ -248,10 +248,11 @@ Esses valores mostram a chamada "explosão combinatória",
 onde o espaço de busca cresce de forma impraticável.
 
 Por isso, abordagens de busca não informada tornam-se inviáveis,
-sendo necessário utilizar estratégias heurísticas (como hill climbing),
+sendo necessário utilizar estratégias heurísticas,
 que exploram apenas parte do espaço de estados de forma guiada,
 sem necessidade de expansão completa da árvore de busca.
----
+
+
 
 ## 5. Busca Heurística
 5. Busca Heurística
